@@ -1,5 +1,12 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Video } from "./Video";
+import { Subject } from "./Subject";
 
 @Entity("rooms")
 class Room {
@@ -11,6 +18,9 @@ class Room {
 
   @OneToMany(() => Video, (video) => video.room) // um para muitos // função callback
   videos: Video[];
+
+  @ManyToMany(() => Subject, (subject) => subject.rooms)
+  subjects: Subject[];
 }
 
 export { Room };
